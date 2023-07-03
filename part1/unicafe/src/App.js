@@ -1,10 +1,6 @@
 import { useState } from 'react'
 
 const App = () => {
-  const feedback = 'give Feedback'
-  const statistics = 'statistics'
-  // Captions for the different spaces
-
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
@@ -21,7 +17,7 @@ const App = () => {
   }
   return (
     <div>
-      <Feedback feedback={feedback}/>
+      <h1>give Feedback</h1>
       <Button handleClick={increaseGood}
         text='good'/>
       <Button handleClick={increaseNeutral}
@@ -30,20 +26,11 @@ const App = () => {
         text='bad'/>
       {/* Feedback section with Feedback Buttons */}
 
-      <Statistics statistics={statistics} 
+      <Statistics
         bad={bad} 
         good={good} 
         neutral={neutral}/>
       {/* Statistics Section with Feedback output */}
-    </div>
-  )
-}
-
-const Feedback = ({feedback}) => {
-  console.log(feedback)
-  return (
-    <div>
-      <h1>{feedback}</h1>
     </div>
   )
 }
@@ -59,17 +46,18 @@ const Button = ({handleClick, text}) => {
 
 const Statistics = ({statistics, good, bad ,neutral}) => {
   console.log(statistics)
+  const heading = 'statistics' 
   if(good === 0 && bad === 0 && neutral === 0){
     return (
       <div>
-        <h1>{statistics}</h1>
+        <h1>{heading}</h1>
         <p>No feedback given</p>
       </div>
     )
   }
   return (
       <div>
-        <h1>{statistics}</h1>
+        <h1>statistics</h1>
         <Statisticline value={good} text='good '/>
         <Statisticline value={neutral} text='neutral '/>
         <Statisticline value={bad} text='bad '/>

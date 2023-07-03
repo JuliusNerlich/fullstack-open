@@ -12,48 +12,37 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
-  const [selected, setSelected] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
   const highestIndex = points.indexOf(Math.max(...points))
+  console.log('Most Votes in index: ' + highestIndex)
 
   const handleNewAnecdoteClick = () => {
-    setSelected(Math.floor(Math.random() * anecdotes.length));
+    setSelectedIndex(Math.floor(Math.random() * anecdotes.length));
   }
-
-  // const points = [...Array(anecdotes.length)].map(() => 0);
 
   const handleVoteClick = () => {
     console.log('before: '+ points)
     const updatedPoints = [...points]
-    updatedPoints[selected] += 1
+    updatedPoints[selectedIndex] += 1
     setPoints(updatedPoints)
     console.log('after: '+ updatedPoints)
     //Vote Section
-
-
-    console.log('Most Votes in index: ' + highestIndex)
   }
 
   return (
     <div>
-      <AnecdoteOfTheDay/>
-      {anecdotes[selected]}<br />
-      <Display score={points[selected]}  />
+      <h2>Anecdote of the day</h2>
+      {anecdotes[selectedIndex]}<br />
+      <Display score={points[selectedIndex]}  />
       <Button handleClick={handleVoteClick} text='Vote' />
       <Button handleClick={handleNewAnecdoteClick} text='next anecdote' />
       {/* Anecdote Section */}
 
-      <MostVoted/>
+      <h2>Anecdote with most votes</h2>
       {anecdotes[highestIndex]}
       <Display score={points[highestIndex]}  />
-    </div>
-  )
-}
-
-const AnecdoteOfTheDay = () => {
-  return (
-    <div>
-      <h2>Anecdote of the day</h2>
+      {/* Most voted Section */}
     </div>
   )
 }
@@ -69,14 +58,6 @@ const Display = ( {score}) => {
   return (
     <div>
       has {score} votes
-    </div>
-  )
-}
-
-const MostVoted = () => {
-  return (
-    <div>
-      <h2>Anecdote with most votes</h2>
     </div>
   )
 }
